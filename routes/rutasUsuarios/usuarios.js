@@ -1,9 +1,9 @@
- let Usuario=require('../models/usuario');
+ let Usuario=require('../../models/modelsUsuarios/usuario');
  let jwt=require('jsonwebtoken');
- let config=require('../config/config');
+ let config=require('../../config/config');
 module.exports=(app)=>{
   
- app.post('/usuario',(req,res)=>{
+app.post('/usuario',(req,res)=>{
     let usuario=req.body;
     Usuario.guardarUsuario(usuario,(error,user)=>{
      if(error){
@@ -36,7 +36,7 @@ module.exports=(app)=>{
                         email:user.emailUser,
                         contra:user.contraUser
                       }
-                })
+                });
               }else{
                 res.json({success:false,msg:"contraseña incorrecta"});
               }
@@ -46,6 +46,16 @@ module.exports=(app)=>{
        }
      });
 
+ });
+
+ app.get('/usuario/:mail',(req,res)=>{
+    Usuario.recuperarUsuarioByMail(req.params.mail,(error,usuario)=>{
+       if(error){
+         res.status(204).json({error:error,msg:'no se encontro usuario'});
+       }else{
+         res.status(200).json(usuario);
+       }
+    });
  });
 
 }

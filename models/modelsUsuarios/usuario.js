@@ -14,11 +14,19 @@ mail:{
 contraUser:{
     type:String,
     default:""
+},
+delegacion:{
+    type:String,
+    default:""
+},
+reportes:{
+    type:Array,
+    default:[]
 }
 
 });
 
-const Usuario=module.exports=mongoose.model(usuarioSchema);
+const Usuario=module.exports=mongoose.model('usuario',usuarioSchema);
 
 module.exports.guardarUsuario=(user,callback)=>{
     bcrypt.genSalt(10,(error,salt)=>{

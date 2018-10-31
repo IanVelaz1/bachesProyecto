@@ -23,6 +23,7 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
+require('./routes/rutasUsuarios/usuarios')(app);
 
 app.use(express.static(path.join(__dirname,"dist")));
 
