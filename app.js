@@ -11,7 +11,7 @@ path=require('path');
 
 let port =process.env.PORT | 8000;
 
-mongoose.connect(config.db);
+mongoose.connect(config.db,{useNewUrlParser:true});
 mongoose.Promise=global.Promise;
 
 ///middlewares

@@ -1,5 +1,5 @@
 const mongoose=require('mongoose');
-const bcrypt=require('bcrypt');
+const bcrypt=require('bcryptjs');
 
 const usuarioSchema=new mongoose.Schema({
 
@@ -41,8 +41,8 @@ module.exports.guardarUsuario=(user,callback)=>{
     })
 }
 
-module.exports.compararContra=(contra,hash,callback)=>{
-   bcrypt.compare(contra,hash,(error,isMatch)=>{
+module.exports.compararContra=(password,hash,callback)=>{
+   bcrypt.compare(password,hash,(error,isMatch)=>{
       if(error){
         throw error;
       }else{
@@ -59,7 +59,7 @@ module.exports.recuperarUsuarioEspecifico=(id,callback)=>{
     Usuario.findById(id,callback);
 }
 
-module.exports.recuperarUsuarioByMail=(emailUser,callback)=>{
+module.exports.recuperarUsuarioMail=(emailUser,callback)=>{
     Usuario.find({mail:emailUser},callback);
 }
 

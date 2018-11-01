@@ -14,42 +14,41 @@ app.post('/usuario',(req,res)=>{
     });
  });
 
- app.post('/usuario/login',(req,res)=>{
+ app.post('/login',(req,res)=>{
     let mail=req.body.mail;
     let password=req.body.contraUser;
-     Usuario.recuperarUsuarioByMail(mail,(error,user)=>{
+    console.log(req.body);
+     Usuario.recuperarUsuarioMail(mail,(error,user)=>{
        if(error){
-        res.json({success:false,msg:"mail no encontrado"});
-       }if(!user){
-        res.json({success:false,msg:"mail incorrecto"});
-       }try{
-          Usuario.compararContra(password,user.contraUser,(error,isMatch)=>{
+         res.status(404).json(error);
+       }
+      console.log(user);
+         try{
+           Usuario.compararContra(password,user[0].contraUser,(error,isMatch)=>{
               if(error){
-                res.json('contraseña incorrecta');
+                res.status(401).json({success:false,msg:"contraseña incorrecta"});
               }else if(isMatch){
-                const token=jwt.sign(user.toJSON(),config.secret,{expiresIn:7200});
-                res.json({
-                    success:true,
-                    token:"bearer "+token,
-                    user:{
-                        id:user._id,
-                        email:user.emailUser,
-                        contra:user.contraUser
-                      }
-                });
+                let token=jwt.sign(user[0].toJSON(),config.secret,{expiresIn:7200});
+                res.status(200).json({
+                success:true,
+                 token:"bearer "+token,
+                 user:user[0]
+                })
               }else{
                 res.json({success:false,msg:"contraseña incorrecta"});
               }
-          });
-       }catch(TypeError){
-        console.log("error usuario no encontrado");
+           });
+         }catch(TypeError){
+          res.json({success:false,msg:"usuario no encontrado"})
        }
      });
+
+     
 
  });
 
  app.get('/usuario/:mail',(req,res)=>{
-    Usuario.recuperarUsuarioByMail(req.params.mail,(error,usuario)=>{
+    Usuario.recuperarUsuarioMail(req.params.mail,(error,usuario)=>{
        if(error){
          res.status(204).json({error:error,msg:'no se encontro usuario'});
        }else{
