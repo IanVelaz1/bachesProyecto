@@ -9,6 +9,7 @@
   "author": "Ian V German T",
   "license": "ISC",
   "dependencies": {
+    "@types/googlemaps": "^3.30.16",
     "bcrypt": "^3.0.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",

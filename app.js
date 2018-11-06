@@ -24,6 +24,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./routes/rutasUsuarios/usuarios')(app);
+require('./routes/rutasReportes/reportes')(app);
 
 app.use(express.static(path.join(__dirname,"dist")));
 

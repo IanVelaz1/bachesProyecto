@@ -32,7 +32,7 @@ app.post('/usuario',(req,res)=>{
                 res.status(200).json({
                 success:true,
                  token:"bearer "+token,
-                 user:user[0]
+                 user:user[0]._id
                 })
               }else{
                 res.json({success:false,msg:"contraseña incorrecta"});
@@ -55,6 +55,28 @@ app.post('/usuario',(req,res)=>{
          res.status(200).json(usuario);
        }
     });
+ });
+
+ app.get('/usuario/:id',(req,res)=>{
+   Usuario.recuperarUsuarioEspecifico(req.params.id,(error,usuario)=>{
+    if(error){
+      res.status(204).json({error:error,msg:'no se encontro usuario'});
+    }else{
+      res.status(200).json(usuario);
+    }
+   });
+ });
+
+ app.put('/usuario/:id',(req,res)=>{
+   let id=req.params.id;
+   let usuario=req.body;
+   Usuario.editarUsuario(id,usuario,(error,user)=>{
+    if(error){
+      res.status(204).json({error:error,msg:'error al editar usuario'});
+    }else{
+      res.status(200).json(user);
+    }
+   });
  });
 
 }
