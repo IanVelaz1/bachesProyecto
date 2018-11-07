@@ -2,10 +2,26 @@ let mongoose=require('mongoose');
 
 let reportesSchema=new mongoose.Schema({
 
-objReporte:{
-    type:Object,
-    default:{}
+categoria:{
+  type:String,
+  default:""
+},
+cliente:{
+  type:String
+},
+descripcion:{
+  type:String,
+  default:""
+},
+subCategoria:{
+  type:String,
+  default:""
+},
+ubicacion:{
+  type:Object,
+  default:{}
 }
+
 
 });
 

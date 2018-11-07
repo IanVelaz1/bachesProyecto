@@ -17,7 +17,10 @@ module.exports = (app) => {
     });
 
     app.post('/reportes', (req, res) => {
-        Reporte.guardarReportes(req.body, (error, reporte) => {
+        console.log(req.body );
+        let objReporte=req.body;
+        
+        Reporte.guardarReportes(objReporte, (error, reporte) => {
             if (error) {
                 res.status(400).json({
                     error: error,
