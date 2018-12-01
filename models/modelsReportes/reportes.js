@@ -20,6 +20,10 @@ subCategoria:{
 ubicacion:{
   type:Object,
   default:{}
+},
+imagenes:{
+  type:Array,
+  default:[]
 }
 
 

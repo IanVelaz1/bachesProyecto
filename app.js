@@ -7,7 +7,8 @@ mongoose=require('mongoose'),
 config=require('./config/config'),
 passport=require('passport'),
 helmet=require('helmet'),
-path=require('path');
+path=require('path'),
+fileUpload=require('express-fileupload');
 
 let port =process.env.PORT | 8000;
 
@@ -22,9 +23,11 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(fileUpload());
 
 require('./routes/rutasUsuarios/usuarios')(app);
 require('./routes/rutasReportes/reportes')(app);
+require('./routes/rutasImagenes/imagenes')(app,fileUpload);
 
 app.use(express.static(path.join(__dirname,"dist")));
 
