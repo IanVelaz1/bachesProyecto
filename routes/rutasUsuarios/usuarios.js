@@ -78,5 +78,18 @@ app.post('/usuario',(req,res)=>{
     }
    });
  });
+ app.get('/usuario', (req, res) => {
+  Usuario.recuperarUsuarios({}, (error, usuario) => {
+      if (error) {
+          res.status(400).json({
+              error: error,
+              success: false,
+              msg: "error al recuperar usuarios"
+          });
+      } else {
+          res.status(200).json(usuario);
+      }
+  });
+});
 
 }
