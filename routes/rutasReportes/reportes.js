@@ -79,4 +79,19 @@ module.exports = (app) => {
         });
     });
 
+    app.get('/reportes/usuario/:idUsuario',(req,res)=>{
+      let id=req.params.idUsuario;
+       Reporte.recuperarReporteIdUsuario(id,(error,reportes)=>{
+        if(error){
+            res.status(400).json({
+                error: error,
+                success: false,
+                msg: "error al recuperar reportes"
+            });
+        }else{
+            res.status(200).json(reportes);
+        }
+       });
+    });
+
 }

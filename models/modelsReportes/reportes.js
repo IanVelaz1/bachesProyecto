@@ -24,6 +24,10 @@ ubicacion:{
 imagenes:{
   type:Array,
   default:[]
+},
+fechaReporte:{
+  type:Date,
+  default:new Date()
 }
 
 
@@ -49,4 +53,8 @@ module.exports.editarReporte=(id,reporte,callback)=>{
 
 module.exports.eliminarReporte=(id,callback)=>{
   Reporte.findByIdAndRemove(id,callback);
+}
+
+module.exports.recuperarReporteIdUsuario=(idUsuario,callback)=>{
+  Reporte.find({cliente:idUsuario},callback)
 }
