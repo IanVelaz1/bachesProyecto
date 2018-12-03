@@ -7,7 +7,8 @@ categoria:{
   default:""
 },
 cliente:{
-  type:String
+  _id:"",
+  nombre:""
 },
 descripcion:{
   type:String,
@@ -28,6 +29,10 @@ imagenes:{
 fechaReporte:{
   type:Date,
   default:new Date()
+},
+arrayImagenesData:{
+  type:Array,
+  default:[]
 }
 
 
@@ -56,5 +61,9 @@ module.exports.eliminarReporte=(id,callback)=>{
 }
 
 module.exports.recuperarReporteIdUsuario=(idUsuario,callback)=>{
-  Reporte.find({cliente:idUsuario},callback)
+  Reporte.find({'cliente._id':idUsuario},callback).sort({fechaReporte:-1})
+}
+
+module.exports.recuperarReportesPosts=(reportes,callback)=>{
+  Reporte.find(reportes,callback).sort({fechaReporte:-1});
 }

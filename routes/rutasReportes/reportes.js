@@ -17,7 +17,6 @@ module.exports = (app) => {
     });
 
     app.post('/reportes', (req, res) => {
-        console.log(req.body );
         let objReporte=req.body;
         
         Reporte.guardarReportes(objReporte, (error, reporte) => {
@@ -87,6 +86,20 @@ module.exports = (app) => {
                 error: error,
                 success: false,
                 msg: "error al recuperar reportes"
+            });
+        }else{
+            res.status(200).json(reportes);
+        }
+       });
+    });
+
+    app.get('/reportes/recientes/inicio',(req,res)=>{
+       Reporte.recuperarReportesPosts({},(error,reportes)=>{
+        if(error){
+            res.status(400).json({
+                error: error,
+                success: false,
+                msg: "error al recuperar reportes index"
             });
         }else{
             res.status(200).json(reportes);
