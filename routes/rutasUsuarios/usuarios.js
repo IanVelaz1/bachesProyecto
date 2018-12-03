@@ -32,7 +32,7 @@ app.post('/usuario',(req,res)=>{
                 res.status(200).json({
                 success:true,
                  token:"bearer "+token,
-                 user:user[0]._id
+                 user:user[0]
                 })
               }else{
                 res.json({success:false,msg:"contraseña incorrecta"});

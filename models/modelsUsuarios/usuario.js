@@ -22,6 +22,10 @@ delegacion:{
 reportes:{
     type:Array,
     default:[]
+},
+permiso:{
+    type:Number,
+    default:0
 }
 
 });
