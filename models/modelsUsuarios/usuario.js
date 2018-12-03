@@ -66,4 +66,7 @@ module.exports.recuperarUsuarioMail=(emailUser,callback)=>{
 module.exports.editarUsuario=(id,usuario,callback)=>{
     Usuario.findByIdAndUpdate(id,usuario,callback);
 }
+module.exports.eliminarUsuario=(id,callback)=>{
+    Usuario.findByIdAndDelete(id,callback);
+}
 

@@ -92,4 +92,19 @@ app.post('/usuario',(req,res)=>{
   });
 });
 
+app.delete('/usuario/:id', (req, res) => {
+  let id = req.params.id;
+  Usuario.eliminarUsuario(id, (error, usuario) => {
+      if (error) {
+          res.status(400).json({
+              error: error,
+              success: false,
+              msg: "error al eliminar usuario"
+          });
+      } else {
+          res.status(200).json(usuario);
+      }
+  });
+});
+
 }
